@@ -26,27 +26,59 @@
 
   <section id="about">
     <h3>About Me</h3>
-    <p>I specialize in calendar automation, dashboard design, and prompt optimization. Fluent in English and Chinese, with a passion for scalable logistics.</p>
+    <p>I am experienced in factory automation and data analytics, with a passion for AI and M/L.</p>
   </section>
 
   <section id="projects">
   <h3>Featured Projects</h3>
 
-  <div class="toggle-buttons">
-    <button onclick="showScenario('base')">Base Scenario</button>
-    <button onclick="showScenario('high')">High Demand</button>
+  
+
+  <div id="Escalation" class="project-card">
+    <img src="assets/esc.png" alt="Escalation" />
+    <h4>Issue Escalation </h4>
+    <p>An enterprise platform to create/track/share information.</p>
   </div>
 
-  <div id="base-scenario" class="project-card">
-    <h4>Multi-Year Limb Collection Scheduler</h4>
-    <p>Automated CSV/ICS generation for municipal logistics. Supports standard demand levels.</p>
+  <div id="Tier" class="project-card">
+    <img src="assets/tier.png" alt="tier" />
+    <h4>Tier Board</h4>
+    <p>Standardized Tier process.</p>
   </div>
 
-  <div id="high-scenario" class="project-card hidden">
-    <h4>High Demand Simulation</h4>
-    <p>Stress-tested calendar logic for surge conditions. Includes buffer zones and alternate routing.</p>
+  <div id="health" class="project-card">
+    
+    <h4>System Health</h4>
+    <p>Report on ERP health</p>
   </div>
-</section>
+
+  <div id="pkf" class="project-card">
+    
+    <h4>Supply and Demand</h4>
+    <p>Supply Chain core function</p>
+  </div>
+
+
+
+  </section>
+
+  <section id="gap-analysis">
+  <h3>Gap Analysis Simulator</h3>
+  <div class="input-group">
+    <label>Forecasted Demand:</label>
+    <input type="number" id="demand" placeholder="e.g. 12000" />
+  </div>
+  <div class="input-group">
+    <label>Inventory Available:</label>
+    <input type="number" id="inventory" placeholder="e.g. 9000" />
+  </div>
+  <div class="input-group">
+    <label>Production Capacity:</label>
+    <input type="number" id="capacity" placeholder="e.g. 3000" />
+  </div>
+  <button onclick="runGapAnalysis()">Analyze</button>
+  <div id="gap-result"></div>
+  </section>
 
 
   <section id="contact">
