@@ -72,3 +72,21 @@ footer {
   text-align: center;
   padding: 1rem;
 }
+
+.toggle-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.toggle-buttons button {
+  background: #e0e7ff;
+  color: #1e1e2f;
+  border: 1px solid #1e1e2f;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+}
+
+.hidden {
+  display: none;
+}
