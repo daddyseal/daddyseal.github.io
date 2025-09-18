@@ -30,16 +30,24 @@
   </section>
 
   <section id="projects">
-    <h3>Featured Projects</h3>
-    <div class="project-card">
-      <h4>Multi-Year Limb Collection Scheduler</h4>
-      <p>Automated CSV/ICS generation for municipal logistics.</p>
-    </div>
-    <div class="project-card">
-      <h4>Tier Board Dashboard</h4>
-      <p>Notion-style layout for manufacturing workflow visualization.</p>
-    </div>
-  </section>
+  <h3>Featured Projects</h3>
+
+  <div class="toggle-buttons">
+    <button onclick="showScenario('base')">Base Scenario</button>
+    <button onclick="showScenario('high')">High Demand</button>
+  </div>
+
+  <div id="base-scenario" class="project-card">
+    <h4>Multi-Year Limb Collection Scheduler</h4>
+    <p>Automated CSV/ICS generation for municipal logistics. Supports standard demand levels.</p>
+  </div>
+
+  <div id="high-scenario" class="project-card hidden">
+    <h4>High Demand Simulation</h4>
+    <p>Stress-tested calendar logic for surge conditions. Includes buffer zones and alternate routing.</p>
+  </div>
+</section>
+
 
   <section id="contact">
     <h3>Contact Me</h3>
