@@ -7,7 +7,7 @@ body {
 }
 
 header {
-  background: #1e1e2f;
+  background: #3030bb;
   color: white;
   padding: 1rem 2rem;
   display: flex;
@@ -55,14 +55,16 @@ button {
 }
 .project-card img {
   width: 100%;
-  max-width: 600px;
-  height: auto;
+  max-width: 400px; /* Shrinks the image width */
+  object-fit: cover;
+  height: 250px;
   border-radius: 6px;
   margin-bottom: 1rem;
   box-shadow: 0 2px 6px rgba(0,0,0,0.1);
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   transform-origin: bottom;
 }
+
 
 .project-card:hover img {
   transform: rotateX(15deg) scale(1.02);
@@ -82,7 +84,7 @@ input, textarea {
 }
 
 footer {
-  background: #1e1e2f;
+  background: #3030bb;
   color: white;
   text-align: center;
   padding: 1rem;
