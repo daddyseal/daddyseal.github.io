@@ -128,12 +128,15 @@ function getNextMonthLabel(index) {
 }
 
 function resetChart() {
+  // Reset internal chart arrays directly
+  gapChart.data.labels = [...originalLabels];
+  gapChart.data.datasets[0].data = [...originalDemandData];
+  gapChart.data.datasets[1].data = [...originalCapacityData];
+  gapChart.update();
+
+  // Reset external tracking arrays too
   currentLabels = [...originalLabels];
   currentDemandData = [...originalDemandData];
   currentCapacityData = [...originalCapacityData];
-
-  gapChart.data.labels = currentLabels;
-  gapChart.data.datasets[0].data = currentDemandData;
-  gapChart.data.datasets[1].data = currentCapacityData;
-  gapChart.update();
 }
+
