@@ -128,9 +128,9 @@ function getNextMonthLabel(index) {
 }
 
 function resetChart() {
-  currentLabels = originalLabels;
-  currentDemandData = originalDemandData;
-  currentCapacityData = originalCapacityData;
+  currentLabels = [...originalLabels];
+  currentDemandData = [...originalDemandData];
+  currentCapacityData = [...originalCapacityData];
 
   gapChart.data.labels = currentLabels;
   gapChart.data.datasets[0].data = currentDemandData;
