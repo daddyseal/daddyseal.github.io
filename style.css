@@ -44,10 +44,36 @@ button {
   background: #1e1e2f;
   color: white;
   border: none;
+  border-radius: 4px;
   padding: 0.75rem 1.5rem;
   cursor: pointer;
   margin-top: 1rem;
 }
+
+button,
+.linkedin-button {
+  display: inline-block;
+  background: #0202fd;
+  color: white;
+  text-decoration: none;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 4px;
+  margin-top: 1rem;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-align: center;
+  box-sizing: border-box;
+  transition: background 0.3s ease;
+}
+
+
+.linkedin-button:hover {
+  background: #333;
+}
+
 
 .project-card {
   background: white;
@@ -66,6 +92,8 @@ button {
   transition: transform 0.4s ease, box-shadow 0.4s ease;
   transform-origin: bottom;
 }
+
+
 
 
 .project-card:hover img {
