@@ -9,7 +9,7 @@ let currentDemandData = [...originalDemandData];
 let currentCapacityData = [...originalCapacityData];
 
 function downloadResume() {
-  alert("This would trigger a résumé download. Link your PDF here.");
+  alert("please visit my LinkedIn to view my resume. Thank you! https://www.linkedin.com/in/jeff-h-8a67026");
   // window.location.href = "assets/JeffreyOps_Resume.pdf";
 }
 
