@@ -5,6 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JeffreyOps | Workflow Architect</title>
   <link rel="stylesheet" href="style.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
 </head>
 <body>
   <header>
@@ -80,6 +82,12 @@
   <div id="gap-result"></div>
   </section>
 
+  <section id="chart-section">
+    <h3>Demand vs. Capacity Over Time</h3>
+    <canvas id="gapChart" width="600" height="300"></canvas>
+    <button onclick="resetChart()">Reset Chart</button>
+
+  </section>
 
   <section id="contact">
     <h3>Contact Me</h3>

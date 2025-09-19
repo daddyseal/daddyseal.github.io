@@ -1,3 +1,13 @@
+
+const originalLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
+const originalDemandData = [12000, 13000, 12500, 14000, 13500, 15000];
+const originalCapacityData = [11000, 11500, 12000, 12500, 13000, 13500];
+
+// Clone for live chart use
+let currentLabels = [...originalLabels];
+let currentDemandData = [...originalDemandData];
+let currentCapacityData = [...originalCapacityData];
+
 function downloadResume() {
   alert("This would trigger a résumé download. Link your PDF here.");
   // window.location.href = "assets/JeffreyOps_Resume.pdf";
@@ -41,4 +51,89 @@ function runGapAnalysis() {
     resultBox.textContent = `❌ Build not supported. Shortfall of ${Math.abs(gap)} units.`;
     resultBox.style.background = "#f8d7da";
   }
+
+  // Add next month label
+  const nextMonth = getNextMonthLabel(currentLabels.length);
+  currentLabels.push(nextMonth);
+  currentDemandData.push(demand);
+  currentCapacityData.push(capacity);  
+
+  gapChart.data.labels = currentLabels;
+  gapChart.data.datasets[0].data = currentDemandData;
+  gapChart.data.datasets[1].data = currentCapacityData;
+  gapChart.update();
+
+}
+
+
+
+
+
+const ctx = document.getElementById('gapChart').getContext('2d');
+
+const gapChart = new Chart(ctx, {
+  type: 'line',
+  data: {
+    labels: originalLabels,
+    datasets: [
+      {
+        label: 'Forecasted Demand',
+        data: originalDemandData,
+        borderColor: '#ff6384',
+        backgroundColor: 'rgba(255,99,132,0.2)',
+        fill: true,
+        tension: 0.3
+      },
+      {
+        label: 'Available Capacity',
+        data: originalCapacityData,
+        borderColor: '#36a2eb',
+        backgroundColor: 'rgba(54,162,235,0.2)',
+        fill: true,
+        tension: 0.3
+      }
+    ]
+  },
+  options: {
+    responsive: true,
+    plugins: {
+      title: {
+        display: true,
+        text: 'Monthly Demand vs. Capacity'
+      },
+      tooltip: {
+        mode: 'index',
+        intersect: false
+      }
+    },
+    interaction: {
+      mode: 'nearest',
+      axis: 'x',
+      intersect: false
+    },
+    scales: {
+      y: {
+        beginAtZero: false
+      }
+    }
+  }
+});
+
+function getNextMonthLabel(index) {
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  const startYear = 2025;
+  const monthIndex = index % 12;
+  const yearOffset = Math.floor(index / 12);
+  return `${months[monthIndex]}/${startYear + yearOffset}`;
+}
+
+function resetChart() {
+  currentLabels = originalLabels;
+  currentDemandData = originalDemandData;
+  currentCapacityData = originalCapacityData;
+
+  gapChart.data.labels = currentLabels;
+  gapChart.data.datasets[0].data = currentDemandData;
+  gapChart.data.datasets[1].data = currentCapacityData;
+  gapChart.update();
 }
