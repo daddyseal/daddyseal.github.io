@@ -200,3 +200,31 @@ footer {
   background: #fff;
   border: 1px solid #ccc;
 }
+/* --- Button Styling for Index Page --- */
+
+.navigation-area {
+    margin: 40px auto;
+    text-align: center; /* Center the button */
+}
+
+.notion-button {
+    /* Base style */
+    background-color: #1a73e8; /* Clean blue accent */
+    color: white;
+    padding: 10px 20px; 
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: none; /* Remove underline from the link */
+    display: inline-block; /* Allows padding and scaling */
+    
+    /* Animation and Transition */
+    transition: background-color 0.2s, transform 0.1s, box-shadow 0.2s; 
+}
+
+.notion-button:hover {
+    background-color: #3385ff; /* Lighter blue on hover */
+    transform: translateY(-2px); /* Subtle lift effect */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
