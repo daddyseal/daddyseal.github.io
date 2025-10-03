@@ -1,17 +1,4 @@
 
-const originalLabels = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun'];
-const originalDemandData = [12000, 13000, 12500, 14000, 13500, 15000];
-const originalCapacityData = [11000, 11500, 12000, 12500, 13000, 13500];
-
-// Clone for live chart use
-let currentLabels = [...originalLabels];
-let currentDemandData = [...originalDemandData];
-let currentCapacityData = [...originalCapacityData];
-
-function downloadResume() {
-  alert("please visit my LinkedIn to view my resume. Thank you! https://www.linkedin.com/in/jeff-h-8a67026");
-  // window.location.href = "assets/JeffreyOps_Resume.pdf";
-}
 
 function showScenario(type) {
   const base = document.getElementById("base-scenario");
@@ -53,71 +40,56 @@ function runGapAnalysis() {
   }
 
   // Add next month label
-  const nextMonth = getNextMonthLabel(currentLabels.length);
-  currentLabels.push(nextMonth);
-  currentDemandData.push(demand);
-  currentCapacityData.push(capacity);  
+  const nextMonth = getNextMonthLabel(AppData.currentLabels.length);
+  AppData.currentLabels.push(nextMonth);
+  AppData.currentDemandData.push(demand);
+  AppData.currentCapacityData.push(capacity);  
 
-  gapChart.data.labels = currentLabels;
-  gapChart.data.datasets[0].data = currentDemandData;
-  gapChart.data.datasets[1].data = currentCapacityData;
+  gapChart.data.labels = AppData.currentLabels;
+  gapChart.data.datasets[0].data = AppData.currentDemandData;
+  gapChart.data.datasets[1].data = AppData.currentCapacityData;
   gapChart.update();
 
 }
 
 
 
+// Ensure gapChart is declared as 'let gapChart = null;' in your data.js or global scope
 
+function initDashboard() {
+    // 1. Check for the Canvas Element (Use the correct ID based on your HTML)
+    const ctxElement = document.getElementById('gapGraph'); // Using 'gapGraph' based on your code
 
-const ctx = document.getElementById('gapChart').getContext('2d');
-
-const gapChart = new Chart(ctx, {
-  type: 'line',
-  data: {
-    labels: originalLabels,
-    datasets: [
-      {
-        label: 'Forecasted Demand',
-        data: originalDemandData,
-        borderColor: '#ff6384',
-        backgroundColor: 'rgba(255,99,132,0.2)',
-        fill: true,
-        tension: 0.3
-      },
-      {
-        label: 'Available Capacity',
-        data: originalCapacityData,
-        borderColor: '#36a2eb',
-        backgroundColor: 'rgba(54,162,235,0.2)',
-        fill: true,
-        tension: 0.3
-      }
-    ]
-  },
-  options: {
-    responsive: true,
-    plugins: {
-      title: {
-        display: true,
-        text: 'Monthly Demand vs. Capacity'
-      },
-      tooltip: {
-        mode: 'index',
-        intersect: false
-      }
-    },
-    interaction: {
-      mode: 'nearest',
-      axis: 'x',
-      intersect: false
-    },
-    scales: {
-      y: {
-        beginAtZero: false
-      }
+    if (!ctxElement) {
+        console.error("Critical Error: 'gapGraph' canvas element not found.");
+        return; // Stop execution if no canvas is found
     }
-  }
-});
+    
+    // 2. SAFEGUARD: Destroy existing chart IF it's already initialized (for debugging)
+    //    We check for IF it EXISTS, not IF it DOESN'T exist.
+    if (window.gapChart) {
+        console.warn("Destroying existing chart instance to prevent error.");
+        window.gapChart.destroy(); 
+        window.gapChart = null; // Clear the reference
+    }
+    
+    // 3. INITIALIZATION: Create the new chart instance
+    //    The check 'if (ctxElement)' above ensures the canvas exists.
+    gapChart = new Chart(ctxElement.getContext('2d'), AppData.gapChartConfig);
+    
+    // 4. Global Access: Assign the working chart instance to window if needed
+    //    Note: If gapChart is globally defined with 'let', this line is optional but harmless.
+    window.gapChart = gapChart; 
+}
+
+
+
+// Ensure the initDashboard function runs after the page loads
+document.addEventListener('DOMContentLoaded', initDashboard);
+
+// You will also need to declare the gapChart variable globally for runGapAnalysis to access it
+// OR simply use window.gapChart in runGapAnalysis if you adopt the `initDashboard` function.
+
 
 function getNextMonthLabel(index) {
   const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
@@ -129,14 +101,11 @@ function getNextMonthLabel(index) {
 
 function resetChart() {
   // Reset internal chart arrays directly
-  gapChart.data.labels = [...originalLabels];
-  gapChart.data.datasets[0].data = [...originalDemandData];
-  gapChart.data.datasets[1].data = [...originalCapacityData];
+  gapChart.data.labels = AppData.originalLabels;
+  gapChart.data.datasets[0].data = AppData.originalDemandData;
+  gapChart.data.datasets[1].data = AppData.originalCapacityData;
   gapChart.update();
 
-  // Reset external tracking arrays too
-  currentLabels = [...originalLabels];
-  currentDemandData = [...originalDemandData];
-  currentCapacityData = [...originalCapacityData];
+
 }
 
