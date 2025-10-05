@@ -2,7 +2,8 @@
 body, html {
     margin: 0;
     padding: 0;
-    height: 100%;
+    height: auto;
+    min-height: 100%;
     scroll-behavior: smooth; 
     font-family: Arial, sans-serif;
     background-color: #1a1a1a; /* Overall dark background */
@@ -10,14 +11,15 @@ body, html {
 
 /* --- Main Deck Container --- */
 .slide-deck-container {
-    height: 100vh;
-    overflow-y: scroll;
-    scroll-snap-type: y mandatory; /* Forced scrolling behavior */
+    height: auto;
+    overflow-y: visible;
+    scroll-snap-type: none; /* Forced scrolling behavior */
     padding-top: 50px; /* Space for the fixed header */
 }
 
 .deck-slide {
-    height: 100vh;
+    min-height: 100vh;
+    height: auto; /* Allows content to flow */
     scroll-snap-align: start; 
     width: 100%;
     padding: 10px 5% 60px 5%; /* Adjusted top padding */
@@ -78,6 +80,7 @@ body, html {
     font-size: 1.1em;
     color: #ffffff;
     margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .icon-list {
@@ -162,9 +165,108 @@ body, html {
     .deck-slide {
         min-height: 100vh; /* Minimum height is full screen */
         height: auto; /* Allows content to flow */
-        padding: 20px 3%; 
+        padding: 10px 5% 60px 5%; /* Consistent padding */
     }
     .deck-nav {
         padding: 10px 20px;
+    }
+}
+/* ========================================================================= */
+/* @media print STYLES (Aggressive Overrides)                                */
+/* ========================================================================= */
+
+@media print {
+    /* --- 1. Top-Level Resets to Kill Scrolling and Fixed Heights --- */
+    body, html {
+        background-color: white !important;
+        color: black !important;
+        
+        /* KILL ALL FIXED/SCROLLING BEHAVIOR */
+        height: auto !important; 
+        overflow: visible !important;
+        scroll-behavior: auto !important;
+        scroll-snap-type: none !important;
+        
+        /* Remove margins imposed by browsers/printers */
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+    
+    /* --- 2. Main Deck Container Fixes --- */
+    .slide-deck-container {
+        display: block !important;
+        position: static !important; /* Must not be fixed/relative */
+        overflow: visible !important; /* Kills the scrollbar */
+        height: auto !important; /* Kills the 100vh height constraint */
+        padding-top: 0 !important; /* Remove space for the fixed header */
+    }
+
+    /* --- 3. Hide Unnecessary Elements --- */
+    .deck-nav,           /* Fixed Navigation Bar */
+    .date-display,       
+    .notion-button       
+     {
+        display: none !important;
+    }
+
+    /* --- 4. Slide Content Flow & Page Breaks (Allows Multiple Containers) --- */
+    .deck-slide {
+        /* Force flow, kill fixed dimensions */
+        display: block !important;
+        height: auto !important;
+        min-height: 0 !important;
+        
+        /* Reset Colors */
+        background-color: white !important;
+        color: black !important;
+        
+        /* Clean vertical spacing between "slides" */
+        padding: 30px 5% !important; 
+        border-bottom: 2px dashed #ccc; /* Visual separation for printed sections */
+        
+        /* Crucial: Prevent content from splitting, but allow flow */
+        page-break-inside: avoid !important;
+        /* Do NOT use page-break-after: always; here! */
+    }
+    
+    .deck-slide:last-child {
+        border-bottom: none !important; /* No line after the last one */
+    }
+
+
+    /* --- 5. Element Color Overrides --- */
+    
+    /* Ensure all text/backgrounds are print-friendly */
+    h1, h2, h3, h4, p, li {
+        color: black !important;
+    }
+
+    .stat-card,
+    .artifact-display,
+    .intro-profile,
+   /* In css/ppt-style.css */
+
+    .role-grid {
+        display: grid;
+        /* 3 equal columns */
+        grid-template-columns: repeat(3, 1fr); 
+        gap: 0; 
+        margin-top: 40px;
+        /* KEY FIX: Add margin to push the content away from the next section */
+        margin-bottom: 60px; 
+        padding: 10px 0;
+        border-top: 1px solid #333; 
+        border-bottom: 1px solid #333; 
+    }
+
+    /* Clean up borders and icons */
+    .role-column::after {
+        display: none !important;
+    }
+    .icon-list li i {
+        color: black !important;
+    }
+    #gapChart {
+        background-color: white !important;
     }
 }
