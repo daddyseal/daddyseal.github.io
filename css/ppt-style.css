@@ -175,98 +175,151 @@ body, html {
 /* @media print STYLES (Aggressive Overrides)                                */
 /* ========================================================================= */
 
+/* ========================================================================= */
+/* @media print STYLES (Plain Text Mode)                                     */
+/* ========================================================================= */
+
 @media print {
-    /* --- 1. Top-Level Resets to Kill Scrolling and Fixed Heights --- */
+    /* --- 1. Global Reset & Print Layout --- */
     body, html {
-        background-color: white !important;
-        color: black !important;
+        background: white !important; /* Force white background */
+        color: black !important;      /* Force black text */
         
-        /* KILL ALL FIXED/SCROLLING BEHAVIOR */
-        height: auto !important; 
-        overflow: visible !important;
-        scroll-behavior: auto !important;
-        scroll-snap-type: none !important;
-        
-        /* Remove margins imposed by browsers/printers */
+        /* Remove all spacing, fixed heights, and scrolling */
         margin: 0 !important;
         padding: 0 !important;
+        height: auto !important; 
+        overflow: visible !important;
+        font-family: monospace, sans-serif !important; /* Simple, readable font */
+        font-size: 10pt !important;
     }
     
-    /* --- 2. Main Deck Container Fixes --- */
-    .slide-deck-container {
-        display: block !important;
-        position: static !important; /* Must not be fixed/relative */
-        overflow: visible !important; /* Kills the scrollbar */
-        height: auto !important; /* Kills the 100vh height constraint */
-        padding-top: 0 !important; /* Remove space for the fixed header */
-    }
-
-    /* --- 3. Hide Unnecessary Elements --- */
-    .deck-nav,           /* Fixed Navigation Bar */
+    /* --- 2. Hide Everything Non-Content --- */
+    .deck-nav,           
     .date-display,       
-    .notion-button       
+    .notion-button,
+    .company-logo,
+    .icon-list li i      /* Hide all icons */
      {
         display: none !important;
     }
 
-    /* --- 4. Slide Content Flow & Page Breaks (Allows Multiple Containers) --- */
-    .deck-slide {
-        /* Force flow, kill fixed dimensions */
+    /* --- 3. Content Overrides (Strip All Formatting) --- */
+    * {
+        /* Generic reset for all elements (extremely aggressive) */
+        background: none !important;
+        background-color: transparent !important;
+        color: black !important;
+        border: none !important;
+        box-shadow: none !important;
+        text-shadow: none !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        text-align: left !important; /* Ensure all text aligns left */
+        
+        /* Reset layout properties */
+        float: none !important;
+        position: static !important;
+        width: auto !important;
+        max-width: 100% !important;
+    }
+    
+    /* --- 4. Section/Slide Flow --- */
+    .deck-slide,
+    .slide-deck-container,
+    .role-grid,
+    .role-column,
+    .expertise-list {
         display: block !important;
         height: auto !important;
         min-height: 0 !important;
-        
-        /* Reset Colors */
-        background-color: white !important;
-        color: black !important;
-        
-        /* Clean vertical spacing between "slides" */
-        padding: 30px 5% !important; 
-        border-bottom: 2px dashed #ccc; /* Visual separation for printed sections */
-        
-        /* Crucial: Prevent content from splitting, but allow flow */
+    }
+
+    /* Add simple visual separation between printed sections/slides */
+    .deck-slide {
+        /* Add a visible text separator for clarity */
+        content: "\A"; /* Add a newline */
+        margin-top: 30px !important;
         page-break-inside: avoid !important;
-        /* Do NOT use page-break-after: always; here! */
     }
     
-    .deck-slide:last-child {
-        border-bottom: none !important; /* No line after the last one */
+    .deck-slide:before {
+        content: "========== NEW SECTION ==========";
+        display: block;
+        color: #555 !important;
+        margin-bottom: 10px !important;
     }
-
-
-    /* --- 5. Element Color Overrides --- */
     
-    /* Ensure all text/backgrounds are print-friendly */
-    h1, h2, h3, h4, p, li {
-        color: black !important;
+    /* Make headers stand out slightly with capitalization/bolding */
+    h1, h2, h3, h4 {
+        font-weight: bold !important;
+        font-size: 1.2em !important;
+        text-transform: uppercase !important;
+        margin-top: 15px !important;
+        margin-bottom: 5px !important;
     }
-
-    .stat-card,
-    .artifact-display,
-    .intro-profile,
-   /* In css/ppt-style.css */
-
-    .role-grid {
-        display: grid;
-        /* 3 equal columns */
-        grid-template-columns: repeat(3, 1fr); 
-        gap: 0; 
-        margin-top: 40px;
-        /* KEY FIX: Add margin to push the content away from the next section */
-        margin-bottom: 60px; 
-        padding: 10px 0;
-        border-top: 1px solid #333; 
-        border-bottom: 1px solid #333; 
+    
+    /* Convert list items to simple blocks */
+    ul, ol, li {
+        list-style: none !important;
+        padding-left: 10px !important; /* Small indent for lists */
+        text-indent: -10px !important;
     }
-
-    /* Clean up borders and icons */
-    .role-column::after {
-        display: none !important;
-    }
-    .icon-list li i {
-        color: black !important;
-    }
-    #gapChart {
-        background-color: white !important;
+    
+    li:before {
+        content: "- " !important; /* Use a dash for list markers */
     }
 }
+/* --- Slide: Thank You & Q&A --- */
+
+.thank-you-content {
+    text-align: center; /* Center all content on this slide */
+}
+
+.thank-you-content h1 {
+    color: #1a73e8; /* Accent color for the main title */
+    font-size: 3em;
+    margin-bottom: 20px;
+    animation: fadeInSlide 0.8s ease-out;
+}
+
+.thank-you-content p {
+    font-size: 1.2em;
+    color: #cccccc;
+    margin-bottom: 30px;
+    animation: fadeInSlide 1s ease-out 0.2s backwards;
+}
+
+.contact-info {
+    margin-top: 40px;
+    padding: 20px;
+    background-color: #333333;
+    border-radius: 8px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    animation: fadeInSlide 1.2s ease-out 0.4s backwards;
+}
+
+.contact-info p {
+    margin: 5px 0;
+    font-size: 1em;
+    color: #e0e0e0;
+}
+
+.contact-info strong {
+    color: #ffffff;
+}
+
+.company-logo {
+    margin-top: 60px; /* Space above the logo */
+    animation: fadeInSlide 1.5s ease-out 0.6s backwards;
+}
+
+.company-logo img {
+    max-width: 200px; /* Adjust as needed for your logo size */
+    height: auto;
+    filter: brightness(0.9) contrast(1.1); /* Subtle adjustment for dark theme */
+}
+
