@@ -1,0 +1,213 @@
+/* --- Global & Print Preparation --- */
+body {
+    font-family: 'Arial', sans-serif;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+}
+
+.resume-container {
+    max-width: 850px; /* Standard A4/Letter width for clean printing */
+    margin: 40px auto;
+    padding: 40px;
+    background-color: white;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Header --- */
+.header {
+    text-align: center;
+    border-bottom: 2px solid #1a73e8;
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 2.2em;
+    color: #1a73e8;
+}
+
+.header h2 {
+    margin-top: 5px;
+    font-size: 1.1em;
+    font-weight: normal;
+    color: #555;
+}
+
+.contact-info {
+    margin-top: 10px;
+}
+
+.contact-info span {
+    margin: 0 10px;
+    font-size: 0.9em;
+    color: #555;
+}
+
+.contact-info i {
+    color: #1a73e8;
+    margin-right: 5px;
+}
+
+.back-link {
+    display: block;
+    margin-top: 15px;
+    color: #777;
+    text-decoration: none;
+    font-size: 0.9em;
+}
+
+/* --- Section Formatting --- */
+.section {
+    margin-bottom: 25px;
+}
+
+.section h3 {
+    color: #1a73e8;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 5px;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+    text-transform: uppercase;
+}
+
+/* --- Skills List --- */
+.skills-list {
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 20px;
+}
+
+.skills-list li {
+    background-color: #eef2fa;
+    color: #1a73e8;
+    padding: 5px 10px;
+    border-radius: 4px;
+    font-size: 0.9em;
+}
+
+/* --- Experience & Education --- */
+.job-entry h4, .edu-entry h4 {
+    margin: 0;
+    font-size: 1.1em;
+    color: #333;
+    display: inline-block;
+}
+
+.job-details, .edu-entry .job-details {
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.9em;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.job-entry ul {
+    padding-left: 20px;
+    margin-top: 5px;
+    font-size: 0.95em;
+}
+
+/* --- Print Styles: Ensure clean A4/Letter output --- */
+@media print {
+    body {
+        background-color: white;
+    }
+    .resume-container {
+        box-shadow: none;
+        margin: 0;
+        padding: 0.5in; /* Standard print margins */
+        max-width: 100%;
+        min-height: 100vh;
+    }
+    
+    /* Avoid breaking sections across pages */
+    .section {
+        page-break-inside: avoid;
+    }
+    .job-entry {
+        page-break-inside: avoid;
+        margin-bottom: 20px;
+    }
+    
+    .back-link {
+        display: none; /* Hide navigation link when printing */
+    }
+    /* Hide navigation link when printing */
+    .back-link {
+        display: none;
+    }
+    
+    /* --- NEW: Make sure links don't look like links when printing --- */
+    .contact-info a {
+        color: inherit !important;       /* Use the default black text color */
+        text-decoration: none !important; /* Remove the underline */
+    }
+}
+
+/* --- Sample Projects Section Styling --- */
+
+.sample-projects {
+    /* Key Change 1: Add a slight inset background */
+    background-color: #f7f7f7; 
+    
+    /* Key Change 2: Add padding to create a box effect */
+    padding: 10px 15px; 
+    
+    /* Key Change 3: Push the block away from the job bullets */
+    margin-top: 15px; 
+    margin-bottom: 5px; /* Less space below */
+    
+    border: 1px solid #eee; /* Light border for definition */
+    border-radius: 4px; /* Subtle rounded corners */
+}
+
+.sample-projects h5 {
+    color: #444; /* Darker, neutral color for the sub-heading */
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-top: 0; /* Remove top margin inside the box */
+    margin-bottom: 8px; /* Add margin below the title */
+    text-transform: uppercase;
+    
+    /* Subtle separator inside the box */
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 5px;
+}
+
+.sample-projects ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sample-projects li {
+    /* Make the font slightly smaller than job bullets */
+    font-size: 0.88em; 
+    margin-bottom: 5px;
+    padding-left: 15px;
+    text-indent: -15px;
+}
+
+.sample-projects li::before {
+    content: "•";
+    color: #1a73e8;
+    font-weight: bold;
+    display: inline-block;
+    width: 15px;
+}
+
+/* --- Print Adjustment --- */
+@media print {
+    .sample-projects {
+        /* Remove color and box shadow for printing */
+        background-color: white !important;
+        box-shadow: none !important;
+        border: 1px dashed #ccc !important; /* Keep a subtle border for separation */
+    }
+}
