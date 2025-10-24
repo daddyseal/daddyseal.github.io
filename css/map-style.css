@@ -1,0 +1,140 @@
+/* --- Global Styles --- */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 0;
+}
+
+.map-container {
+    padding: 50px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* --- Header --- */
+.map-header {
+    background-color: #1a73e8;
+    color: white;
+    padding: 15px 50px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.map-header h1 {
+    margin: 0;
+    font-size: 1.5em;
+}
+
+.back-link {
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 5px 10px;
+    border: 1px solid white;
+    border-radius: 4px;
+    transition: background-color 0.2s;
+}
+
+.back-link:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* --- Table Styling --- */
+.competency-table {
+    width: 100%;
+    /* KEY FIX: Set a minimum width greater than the container width 
+       to ensure the table triggers the horizontal scroll. */
+    min-width: 950px; /* Increased from 800px to accommodate 6 columns */
+    border-collapse: collapse;
+    margin-top: 25px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.competency-table th, .competency-table td {
+    padding: 15px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+.competency-table thead th {
+    background-color: #1a73e8;
+    color: white;
+    font-size: 1.1em;
+    font-weight: bold;
+    border-color: #1a73e8;
+}
+
+.competency-table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+/* --- New Icon Styling for Clarity --- */
+.competency-table .fa-check-circle {
+    color: #008000; /* Darker, clear Green for FULL MATCH */
+    font-size: 1.1em;
+}
+.competency-table .fa-minus-circle {
+    color: #ff8c00; /* Dark Orange/Amber for PARTIAL/POWER USER */
+    font-size: 1.1em;
+}
+.competency-table .fa-times-circle {
+    color: #cc0000; /* Clear Red for NO MATCH/GAP */
+    font-size: 1.1em;
+}
+.competency-table .fa-star {
+    color: #1a73e8; /* Your accent Blue for UNIQUE VALUE */
+    font-size: 1.1em;
+}
+
+/* Ensure the header rows stay visually separate from the comparison */
+.competency-table thead th:nth-child(2) {
+    background-color: #0056b3; /* Darker blue for YOUR column */
+}
+
+/* --- Conclusion --- */
+.summary-note {
+    margin-top: 30px;
+    padding: 15px;
+    border-left: 5px solid #1a73e8;
+    background-color: #eef2fa;
+    font-weight: 500;
+}
+
+/* --- Container for horizontal scrolling on small screens --- */
+.map-table-wrapper {
+    /* KEY FIX: This property forces the content to stay inside 
+       the container and allows horizontal scrolling if necessary. */
+    overflow-x: auto; 
+    
+    /* Ensure no padding on the sides is contributing to the spill */
+    margin: 0 -20px; 
+    padding: 0 20px; 
+}
+
+
+/* --- Print Styles --- */
+@media print {
+    body {
+        background-color: white;
+    }
+    .map-header, .back-link {
+        display: none;
+    }
+    .map-container {
+        padding: 0;
+        margin: 0.5in auto;
+    }
+    .competency-table {
+        box-shadow: none;
+        font-size: 10pt;
+    }
+    .competency-table thead th {
+        background-color: #ccc !important;
+        color: black !important;
+    }
+}
