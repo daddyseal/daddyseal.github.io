@@ -138,3 +138,83 @@ body {
         color: black !important;
     }
 }
+
+/* ======================================================= */
+/* --- VALUE ALIGNMENT TABLE STYLES --- */
+/* ======================================================= */
+
+.value-alignment-section {
+    /* Use a very light background to distinguish this strategic section */
+    background-color: #fcfcfc; 
+    border-top: 2px solid #ddd; 
+    padding-top: 25px;
+    margin-bottom: 25px;
+}
+
+.value-table-wrapper {
+    /* Enables horizontal scrolling if the table is too wide */
+    overflow-x: auto; 
+    margin: 0 -20px; 
+    padding: 0 20px;
+}
+
+.value-alignment-table {
+    width: 100%;
+    /* Ensure enough width for the 4 columns */
+    min-width: 950px; 
+    border-collapse: collapse;
+    margin-top: 15px;
+    background-color: white;
+    border: 1px solid #ddd;
+}
+
+.value-alignment-table th, .value-alignment-table td {
+    padding: 12px 10px;
+    text-align: left;
+    border: 1px solid #eee;
+    font-size: 0.9em;
+    vertical-align: top; /* Align content to the top of the cell */
+}
+
+.value-alignment-table thead th {
+    background-color: #4a4a4a; /* Darker header for this table */
+    color: white;
+    font-size: 0.95em;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+/* Unique Advantage column styling to make it pop */
+.value-alignment-table td:nth-child(4) {
+    background-color: #f0f7ff; /* Very light blue background */
+    border-left: 3px solid #1a73e8;
+    font-style: italic;
+    font-size: 0.95em;
+}
+
+/* Ensure bold text within the cells is strong */
+.value-alignment-table td strong {
+    font-weight: bold;
+    color: #333;
+}
+
+/* --- Print Adjustment --- */
+@media print {
+    .value-alignment-section {
+        background-color: white !important;
+        border-top: 1px dashed #ccc;
+    }
+    .value-alignment-table {
+        box-shadow: none;
+        min-width: 100%;
+        font-size: 8pt; 
+    }
+    .value-alignment-table thead th {
+        background-color: #ccc !important;
+        color: black !important;
+    }
+    .value-alignment-table td:nth-child(4) {
+        background-color: white !important;
+        border-left: 3px solid #999;
+    }
+}
